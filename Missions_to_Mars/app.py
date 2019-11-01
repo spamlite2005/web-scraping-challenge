@@ -18,11 +18,12 @@ def index():
     return render_template("index.html", marslinks=marslinks)
 
 
-@app.route("/scrape")
+@app.route("/scrape_mars")
 def scraper():
     marslinks = mongo.db.marslinks
     marslinks_data = scrape_mars.scrape()
     marslinks.update({}, marslinks_data, upsert=True)
+#    return render_template("scrape_mars.html", marslinks=marslinks)
     return redirect("/", code=302)
 
 
